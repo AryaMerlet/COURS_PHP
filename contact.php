@@ -12,12 +12,12 @@ if (isset($_POST['soumettre'])) {
     //On définit la requête sql qui va envoyer toutes les données a la base de données
     $sql = 'INSERT INTO contacts (prenom_contact, nom_contact, mail_contact, motif) 
             VALUES (:prenom, :nom, :mail, :motif)';
-        $temp = $pdo->prepare($sql);
-        $temp->Bindparam(":prenom", $prenom, PDO::PARAM_STR);
-        $temp->Bindparam(":nom", $nom, PDO::PARAM_STR);
-        $temp->Bindparam(":mail", $mail, PDO::PARAM_STR);
-        $temp->Bindparam(":motif", $motif, PDO::PARAM_STR);
-        $temp->execute();
+    $temp = $pdo->prepare($sql);
+    $temp->Bindparam(":prenom", $prenom, PDO::PARAM_STR);
+    $temp->Bindparam(":nom", $nom, PDO::PARAM_STR);
+    $temp->Bindparam(":mail", $mail, PDO::PARAM_STR);
+    $temp->Bindparam(":motif", $motif, PDO::PARAM_STR);
+    $temp->execute();
     }
 
 ?>
