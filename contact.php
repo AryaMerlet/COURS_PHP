@@ -36,7 +36,7 @@ if (isset($_POST['soumettre'])) {
     include('header.php');
     ?>
     <div class="label_home">
-        <form action="home.php?confirmation=1" method="post">
+        <form action="index.php?confirmation=1" method="post">
             <div class="label_box">
                 <label for="prenom">Prénom : </label>
                 <input type="text" name="prenom" id="prenom" placeholder="Prenom" required />
