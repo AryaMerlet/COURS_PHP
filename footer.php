@@ -1,5 +1,5 @@
   <!-- Footer -->
-  <footer
+<footer
           class="text-center text-lg-start text-white"
           style="background-color: #45526e"
           >
