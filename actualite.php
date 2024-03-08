@@ -38,9 +38,22 @@ class Actualite{
      * @param string $sources sources de l'actu
      */
 
+    public function __construct(array $values, $pdo)
+    {
+        $this->id_actualite = $values['id_actualite'];
+        $this->titre = $values['titre'];
+        $this->sous_titre = $values['sous_titre'];
+        $this->article = $values['article'];
+        $this->image = $values['image'];
+        $this->date_publication = $values['date_publication'];
+        $this->date_modification = $values['date_modification'];
+        $this->id_auteur = $values['id_auteur'];
+        $this->id_tag = $values['id_tag'];
+        $this->id_nom_source = $values['id_nom_source'];
+        $this->id_lien = $values['id_lien'];
+        $this->pdo = $pdo;
+    }
     public static function getActualite($pdo){
-
-        $pdo->exec("SET CHARACTER SET utf8mb4");
         $sql = 'SELECT * FROM 
         actualites,tags,auteurs,sources,liens WHERE 
         actualites.id_auteur = auteurs.id_auteur AND 
@@ -71,22 +84,6 @@ class Actualite{
             throw new Exception('Vous n"êtes pas censé être ici sans lien depuis un article');
         }
         
-    }
-
-    public function __construct(array $values, $pdo)
-    {
-        $this->id_actualite = $values['id_actualite'];
-        $this->titre = $values['titre'];
-        $this->sous_titre = $values['sous_titre'];
-        $this->article = $values['article'];
-        $this->image = $values['image'];
-        $this->date_publication = $values['date_publication'];
-        $this->date_modification = $values['date_modification'];
-        $this->id_auteur = $values['id_auteur'];
-        $this->id_tag = $values['id_tag'];
-        $this->id_nom_source = $values['id_nom_source'];
-        $this->id_lien = $values['id_lien'];
-        $this->pdo = $pdo;
     }
 
     public function getAuteur(){

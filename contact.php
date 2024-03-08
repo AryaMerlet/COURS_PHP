@@ -2,7 +2,7 @@
 // script de connexion
 require_once('class_contact.php');
 require_once('base_donnee.php');
-
+Contact::ifIsset($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@ require_once('base_donnee.php');
         <?php include('header.php');?>
     </footer>
     <div class="label_home">
-        <form action="index.php?confirmation=1" method="post">
+        <form action="#" method="post">
             <div class="label_box">
                 <label for="prenom">Prénom : </label>
                 <input type="text" name="prenom" id="prenom" placeholder="Prenom" required />

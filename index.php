@@ -15,6 +15,7 @@ require_once('actualite.php');
             <?=include('header.php');?>
         </header>
         <main>
+            <div id="notif"></div>
         <?php 
         if(isset($_REQUEST['confirmation'])){
             $confirmation = htmlentities($_REQUEST['confirmation']);
