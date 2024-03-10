@@ -1,4 +1,4 @@
-<?php include_once('base_donnee.php'); 
+<?php
 require_once('actualite.php');
 ?>
 
