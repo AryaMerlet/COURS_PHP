@@ -12,17 +12,18 @@ class Database{
         $pdo = new PDO($dsn, $user, $pass);
         return $pdo;
     }
-    public static function preparedQuery($sql, $params = []) {
+
+    public static function query($sql, $params=[]) {
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare($sql);
+        $temp = $pdo->prepare($sql);
         
         foreach ($params as $param => $value) {
-            $stmt->bindParam($param, $value);
+            $temp->bindParam($param, $value);
         }
-        $stmt->execute();
+        $temp->execute();
         
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+        return $temp->fetchAll(PDO::FETCH_ASSOC);
+    } 
+}
  
 
-}
