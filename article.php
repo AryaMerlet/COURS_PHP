@@ -1,4 +1,4 @@
-<?php require_once('base_donnee.php'); 
+<?php 
 require_once('actualite.php');
 ?>
 
@@ -16,9 +16,9 @@ require_once('actualite.php');
         <?php require_once('header.php'); ?>
     </header>
 <?php
-    $temp = Actualite::getArticle($pdo);
+    $temp = Actualite::getArticle();
     foreach ($temp as $t){
-        $actualite = new Actualite($t,$pdo); ?>
+        $actualite = new Actualite($t); ?>
         <main>
             <section id='section'> 
                 <h2><?=$actualite->titre?></h2>                

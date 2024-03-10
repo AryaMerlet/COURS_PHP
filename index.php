@@ -14,8 +14,8 @@ require_once('actualite.php');
         <header>
             <?=include('header.php');?>
         </header>
+        <div id="notif"></div>
         <main>
-            <div id="notif"></div>
         <?php 
         if(isset($_REQUEST['confirmation'])){
             $confirmation = htmlentities($_REQUEST['confirmation']);
@@ -24,9 +24,9 @@ require_once('actualite.php');
                 $confirmation = 0;
             }
         }
-        $temp = Actualite::getActualite($pdo);
+        $temp = Actualite::getActualite();
         foreach ($temp as $t){
-            $actualite = new Actualite($t,$pdo); ?>
+            $actualite = new Actualite($t); ?>
                 <div>
                     <a href='article.php?id=<?=$actualite->id_actualite?>'>
                         <img class='miniature' src='images/<?=$actualite->image?>'/>
@@ -39,6 +39,7 @@ require_once('actualite.php');
         <footer>
             <?=include('footer.php');?>
         </footer>
+        <script src="JS/POO_js.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	</body>
 </html>

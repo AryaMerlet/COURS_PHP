@@ -1,6 +1,7 @@
 <?php
+require_once('PDO.php');
 
-class Actualite{
+class Actualite extends Database{
         /**id de l'actualité */
         public $id_actualite;
         /**titre de l'actualité */
@@ -23,22 +24,10 @@ class Actualite{
         public $id_nom_source;        
         /**source de l'actualité */
         public $id_lien;
-
         private $pdo;
         
-    /**Constructeur de la class actualite
-     * @param int $id id de l'actualite
-     * @param string $titre titre de l'actu
-     * @param string $texte texte de l'actu
-     * @param string $lien_image lien de l'image de l'actu
-     * @param string $date date de creation de l'actu
-     * @param string $date_revision date de revision de l'actu
-     * @param int $id_auteur id de l'auteuer de l'actu
-     * @param string $id_tags tags lié a l'actu
-     * @param string $sources sources de l'actu
-     */
 
-    public function __construct(array $values, $pdo)
+    public function __construct(array $values)
     {
         $this->id_actualite = $values['id_actualite'];
         $this->titre = $values['titre'];
@@ -51,9 +40,10 @@ class Actualite{
         $this->id_tag = $values['id_tag'];
         $this->id_nom_source = $values['id_nom_source'];
         $this->id_lien = $values['id_lien'];
-        $this->pdo = $pdo;
+        
     }
-    public static function getActualite($pdo){
+
+    public static function getActualite(){
         $sql = 'SELECT * FROM 
         actualites,tags,auteurs,sources,liens WHERE 
         actualites.id_auteur = auteurs.id_auteur AND 
@@ -61,12 +51,11 @@ class Actualite{
         actualites.id_nom_source = sources.id_source AND
         actualites.id_lien = liens.id_lien ORDER BY
         actualites.date_modification DESC LIMIT 5';
-        $temp = $pdo -> prepare($sql);
-        $temp -> execute();
-        return $temp;
+        return Database::preparedQuery($sql, ['' => '']);
     }
 
-    public static function getArticle($pdo){
+    public static function getArticle(){
+        $pdo = Database::getPDO();
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $sql = 'SELECT * FROM 
@@ -76,10 +65,7 @@ class Actualite{
             actualites.id_tag = tags.id_tag AND 
             actualites.id_nom_source = sources.id_source AND
             actualites.id_lien = liens.id_lien';
-            $temp = $pdo -> prepare($sql);
-            $temp -> bindParam(':id', $id, PDO::PARAM_INT);
-            $temp -> execute();
-            return $temp;
+        return Database::preparedQuery($sql, [':id' => $id]);
         }else{
             throw new Exception('Vous n"êtes pas censé être ici sans lien depuis un article');
         }
