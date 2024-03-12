@@ -54,7 +54,6 @@ class Actualite extends Database{
     }
 
     public static function getArticle(){
-        $pdo = Database::getPDO();
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $sql = 'SELECT * FROM 
