@@ -18,47 +18,15 @@ Admin::add();
             <?=include_once('header.php');?>
         </header>
         <main>
-            <table border=1>
-                <tr>
-                    <td>ID</td>
-                    <td>Nom</td>
-                    <td>Parent</td>
-                </tr> 
-            <?php 
-            $temp = Admin::getAdminMenu();
-            foreach($temp as $t){
-                $tableau = new Admin($t);
-                ?>
-                <tr>
-                    <td><?= $tableau->id_categorie;?></td>
-                    <td><?= $tableau->nom;?></td>
-                    <td><?php
-                    if($tableau->categorie==null){
-                        echo "aucun";
-                    } else{
-                        echo $tableau->categorie;
-                    }
-                    ?></td>
-                    <td><form action="page_admin.php" method="post">
-                        <input type="hidden" name="id_categorie" value="<?=$tableau->id_categorie?>">
-                        <input type="submit" value="🗑️">
-                        
-                    </form></td>
-                    <td><form action="modifier_categorie.php?id='<?=$tableau->id_categorie?>'" method="post">
-                        <input type="hidden" name="nom" value="<?=$tableau->id_categorie?>">
-                        <input type="submit" value="✏️">
-                    </form></td>
-                </tr>
-            <?php 
-            }
-            ?> 
-                <form action="ajout_formation.php" method="post">
-                    <input type="hidden" name="nom" value="' . $r['nom'] . '">
-                    <input type="submit" class="add-btn delete-btn" value="➕">
-                </form>
-            </table>
-            <form action="#" method="post">
-
+            <form action="">
+                <label for="nom">Nom : </label>
+                <input type="text" name="nom" id="nom" placeholder="Nom" required>
+                <label for="parent">Parent : </label>
+                <input type="text" name="parent" id="parent" placeholder="">
+                <button type="submit">Ajouter</button>
+                <br/><br/>
+                <a href="page_admin.php">Retour</a>
+            </form>
             </form>
         </main>
         <footer>
