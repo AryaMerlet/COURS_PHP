@@ -50,7 +50,7 @@ class Actualite extends Database{
         actualites.id_nom_source = sources.id_source AND
         actualites.id_lien = liens.id_lien ORDER BY
         actualites.date_modification DESC LIMIT 5';
-        return Database::query($sql);
+        return Database::preparedQuery($sql);
     }
 
     public static function getArticle(){
@@ -63,7 +63,7 @@ class Actualite extends Database{
             actualites.id_tag = tags.id_tag AND 
             actualites.id_nom_source = sources.id_source AND
             actualites.id_lien = liens.id_lien';
-            return Database::query($sql,[':id' => $id]);
+            return Database::preparedQuery($sql,[':id' => $id]);
         }else{
             header('index.php');
         }
@@ -72,7 +72,7 @@ class Actualite extends Database{
 
     public function getAuteur(){
         $sql = "SELECT nom_auteur,fonction FROM auteurs WHERE id_auteur=:id";
-        $temp = Database::query($sql,[':id' => $this->id_auteur]);
+        $temp = Database::preparedQuery($sql,[':id' => $this->id_auteur]);
         foreach($temp as $t){
             return $t['nom_auteur'].' '.$t['fonction'];    
         }
