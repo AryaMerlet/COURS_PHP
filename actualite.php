@@ -1,5 +1,5 @@
 <?php
-require_once('Database.php');
+require_once('database.php');
 
 class Actualite extends Database{
         /**id de l'actualité */
@@ -24,7 +24,6 @@ class Actualite extends Database{
         public $id_nom_source;        
         /**source de l'actualité */
         public $id_lien;
-        private $pdo;
         
 
     public function __construct(array $values)
@@ -51,7 +50,7 @@ class Actualite extends Database{
         actualites.id_nom_source = sources.id_source AND
         actualites.id_lien = liens.id_lien ORDER BY
         actualites.date_modification DESC LIMIT 5';
-        return Database::preparedQuery($sql, ['' => '']);
+        return Database::query($sql);
     }
 
     public static function getArticle(){
@@ -64,18 +63,16 @@ class Actualite extends Database{
             actualites.id_tag = tags.id_tag AND 
             actualites.id_nom_source = sources.id_source AND
             actualites.id_lien = liens.id_lien';
-        return Database::preparedQuery($sql, [':id' => $id]);
+            return Database::query($sql,[':id' => $id]);
         }else{
-            throw new Exception('Vous n"êtes pas censé être ici sans lien depuis un article');
+            header('index.php');
         }
         
     }
 
     public function getAuteur(){
         $sql = "SELECT nom_auteur,fonction FROM auteurs WHERE id_auteur=:id";
-        $temp = $this->pdo->prepare($sql);
-        $temp->bindParam(':id',$this->id_auteur,PDO::PARAM_INT);
-        $temp->execute();
+        $temp = Database::query($sql,[':id' => $this->id_auteur]);
         foreach($temp as $t){
             return $t['nom_auteur'].' '.$t['fonction'];    
         }
