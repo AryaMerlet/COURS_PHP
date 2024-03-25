@@ -1,5 +1,5 @@
 <?php
-require_once('PDO.php');
+require_once('Database.php');
 
 class Actualite extends Database{
         /**id de l'actualité */

@@ -1,4 +1,5 @@
 <?php
+require_once('Database.php');
 
 class Contact extends Database{
     public string $nom;
