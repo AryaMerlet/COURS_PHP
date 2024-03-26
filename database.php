@@ -17,10 +17,9 @@ class Database{
         $stmt = $pdo->prepare($sql);
         
         foreach ($params as $param => $value) {
-            $stmt->bindParam($param, $value);
+            $stmt->bindValue($param, $value);
         }
         $stmt->execute();
-        
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
  

@@ -1,5 +1,5 @@
 <?php
-include_once('database.php');
+require_once('database.php');
 
 class Menu extends Database{
     public $nom;
@@ -19,39 +19,3 @@ class Menu extends Database{
     }
 }
 
-class Admin extends Menu{
-    public $id_categorie;
-    public $categorie;
-
-    public function __construct(array $values){
-        $this->id_categorie = $values['id_categorie'];
-        $this->nom = $values['nom'];
-        $this->categorie = $values['categorie'];
-    }
-    public static function getAdminMenu(){
-        $sql = "SELECT * FROM categories";
-        return Database::preparedQuery($sql);
-    }
-    public static function delete(){
-        if(isset($_REQUEST['id_categorie'])){
-            $id_categorie = htmlentities($_REQUEST['id_categorie']);
-            $sql = "DELETE FROM categories WHERE id_categorie = :id_categorie";
-            $temp = Database::preparedQuery($sql,[':id_categorie' => $id_categorie]);
-        }
-    }
-    public static function modif(){
-        if(isset($_REQUEST['id_categorie'])){
-            $id_categorie = htmlentities($_REQUEST['id_categorie']);
-            $sql = "DELETE FROM categories WHERE id_categorie = :id_categorie";
-            $temp = Database::preparedQuery($sql,[':id_categorie' => $id_categorie]);
-        }
-    }
-    public static function add(){
-        if(isset($_REQUEST['id_categorie'])){
-            $id_categorie = htmlentities($_REQUEST['id_categorie']);
-            $sql = "DELETE FROM categories WHERE id_categorie = :id_categorie";
-            $temp = Database::preparedQuery($sql,[':id_categorie' => $id_categorie]);
-        }
-    }
-
-}
